@@ -34,6 +34,73 @@ The effectiveness of the selection strategy is quantified by the rejection of **
 | **Pre-selection** | 162,046 | 65,818 | 71.12% |
 | **Final Selection** | 67,124 | 5,340 | **92.63%** |
 
+## Datasets Used
+
+This analysis is based on publicly available data from the :contentReference[oaicite:0]{index=0} :contentReference[oaicite:1]{index=1} via the :contentReference[oaicite:2]{index=2}.
+
+The following Monte Carlo (MC) simulated datasets were used:
+
+---
+
+### 🔹 Signal Process
+
+- **Drell–Yan (Z → e⁺e⁻)**
+  - Dataset: DYtoLL_M50  
+  - Description: Simulated Drell–Yan events in the invariant mass region above 50 GeV  
+  - Link: https://opendata.cern.ch/record/12345 *(replace with your exact link)*  
+
+---
+
+### 🔹 Background Processes
+
+- **Top Quark Pair Production (TTbar)**
+  - Dataset: TTTo2L2Nu  
+  - Description: Top-antitop production with dileptonic decay  
+  - Link: https://opendata.cern.ch/record/XXXXX  
+
+- **Single Top Production**
+  - Dataset: SingleTop  
+  - Description: Single top quark processes (t-channel, s-channel, tW)  
+  - Link: https://opendata.cern.ch/record/XXXXX  
+
+- **Di-boson Production**
+  - **WZ**
+    - Dataset: WZ  
+    - Description: WZ → ℓν e⁺e⁻  
+    - Link: https://opendata.cern.ch/record/XXXXX  
+
+  - **ZZ**
+    - Dataset: ZZ  
+    - Description: ZZ → νν e⁺e⁻  
+    - Link: https://opendata.cern.ch/record/XXXXX  
+
+  - **WW**
+    - Dataset: WWTo2L2Nu  
+    - Description: WW → e⁺ν e⁻ν  
+    - Link: https://opendata.cern.ch/record/XXXXX  
+
+---
+## Data Source
+
+All datasets are obtained from:
+https://opendata.cern.ch
+
+### 📌 Notes
+
+- All datasets are processed in ROOT format and accessed through the "Events" TTree.
+- Slimmed versions of the datasets (with reduced branches) are used for efficient analysis.
+- The analysis focuses on the invariant mass window:
+  
+  **60 GeV < m_ll < 120 GeV**
+
+- These datasets are widely used for validating Standard Model predictions and detector performance.
+
+---
+
+### ⚠️ Important
+
+Please replace the placeholder links (`XXXXX`) with the exact dataset URLs you used from the CMS Open Data Portal.
+
 ## 🚀 Execution Guide
 Ensure you have **CERN ROOT 6.28/02** or later installed.
 
