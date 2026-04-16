@@ -4,10 +4,47 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Physics: CMS-Open-Data](https://img.shields.io/badge/Physics-CMS--Open--Data-orange.svg)](https://opendata.cern.ch/)
 
+
+## Drell–Yan Process and Analysis Strategy
+
+The Drell–Yan (DY) process is a fundamental mechanism in high-energy particle physics, describing the production of lepton pairs through quark–antiquark annihilation:
+
+q q̄ → Z/γ* → e⁺ e⁻
+
+At the Large Hadron Collider (LHC), this process serves as a clean and well-understood signal for testing the Standard Model and detector performance.
+
+In this project, the analysis focuses on the di-electron final state using CMS Open Data. The invariant mass region around the Z boson (60–120 GeV) is used to isolate the signal.
+
+### Analysis Techniques Used
+
+- **Event Selection**
+  - Exactly two electrons
+  - Opposite charge requirement
+  - Electron identification using MVA WP90
+
+- **Kinematic Reconstruction**
+  - Invariant mass (m_ll)
+  - Transverse momentum (pT_ll)
+  - Angular separation (Δφ)
+
+- **Background Suppression**
+  - Projected MET to reduce WW and top backgrounds
+  - Kinematic cuts on pT, η, and Δφ
+
+- **Monte Carlo Comparison**
+  - Signal: Drell–Yan
+  - Backgrounds: TTbar, WZ, ZZ, WW, SingleTop
+
+- **Histogram Normalization**
+  - All distributions normalized to compare shapes rather than yields
+
+This approach allows clear separation between signal and background processes and helps in optimizing selection criteria.
+
 ## 🔬 Executive Summary
 This repository contains a high-performance analysis framework for the study of the Drell-Yan process ($q\bar{q} \to Z/\gamma^* \to e^+e^-$) using **CMS Open Data**. The pipeline executes a systematic event selection (Cut-Flow) to isolate the $Z$ resonance, achieving a final signal purity of **92.63%**. 
 
 A key technical highlight of this repository is the implementation of **Projected MET** and **MVA-based Electron Identification** to suppress irreducible diboson and leptonic $t\bar{t}$ backgrounds.
+
 
 ## 🏗 Repository Architecture
 The codebase is structured to facilitate a modular physics workflow, from data slimming to final visualization:
@@ -34,18 +71,151 @@ The effectiveness of the selection strategy is quantified by the rejection of **
 | **Pre-selection** | 162,046 | 65,818 | 71.12% |
 | **Final Selection** | 67,124 | 5,340 | **92.63%** |
 
-## 🚀 Execution Guide
-Ensure you have **CERN ROOT 6.28/02** or later installed.
+## Code Usage and Workflow
 
-```bash
-# 1. Slim the raw data
-root -l branch_extractor_k.C
+This repository contains a complete analysis pipeline for studying the Drell–Yan process in the di-electron channel using ROOT macros. Each code performs a specific task in the workflow.
+--
+### 🔹 1. `branch_extractor.C` — Data Slimming
 
-# 2. Add Projected MET branch
-root -l 'projected_MET1.C("DYtoLL_M50.root")'
+**Purpose:**
+Reduces the size of ROOT files by keeping only relevant branches required for analysis.
 
-# 3. Run the analysis and generate Yields
-root -l Electron_Cut_Flow_Complete.C
+**Why important:**
+- Improves processing speed  
+- Reduces memory usage  
 
-# 4. Generate Stacked Plots
-root -l Stacked.C
+**Run:**
+->root -l
+->.x branch_extractor.C
+
+
+---
+
+### 🔹 2. `branch_type.C` — Branch Inspection
+
+**Purpose:**
+Checks the data types of selected branches in ROOT files.
+
+**Why important:**
+- Ensures correct variable types  
+- Helps debug mismatches in analysis  
+
+
+---
+
+### 🔹 3. `projected_MET.C`
+
+**Purpose:**
+Computes additional physics variables:
+- Δφ between MET and electrons  
+- Minimum Δφ  
+- Projected MET  
+
+**Why important:**
+- Helps suppress background processes (WW, top quark)  
+- Improves signal purity  
+
+
+---
+
+### 🔹 4. `Electron_Cut_Flow_Complete.C` — Event Selection
+
+**Purpose:**
+Applies step-by-step selection cuts and computes efficiencies.
+
+**Selection Steps:**
+1. Two tight electrons (MVA WP90)  
+2. Opposite charge  
+3. pT and η cuts  
+4. Invariant mass window (60–120 GeV)  
+5. MET cut  
+6. Angular separation cut  
+
+**Output:**
+- Event counts at each stage  
+- Efficiency calculation  
+- Results saved in `cutflow.txt`  
+
+
+---
+
+### 🔹 5. `superimposed_plots.C` — Final Visualization
+
+**Purpose:**
+Generates normalized overlay plots for signal and background comparison.
+
+**Plots Produced:**
+- Invariant mass (m_ll)  
+- Transverse momentum (pT_ll)  
+- Projected MET  
+- Δφ between leptons  
+- Leading/subleading electron kinematics  
+
+**Output:**
+- High-quality PNG plots  
+
+
+---
+
+## 🔁 Recommended Workflow Order
+
+For best results, run the codes in this sequence:
+
+1. `branch_extractor.C`  
+2. `branch_type.C` (optional)  
+3. `projected_MET.C`  
+4. `Electron_Cut_Flow_Complete.C`  
+5. `superimposed_plots.C`  
+
+---
+
+## 📂 Requirements
+
+- ROOT installed (`root -l` should work)
+- All `.C` files in the same directory
+- Input ROOT files available:
+  - DYtoLL_M50_slim.root  
+  - TTTo2L2Nu_slim.root  
+  - WZ_slim.root  
+  - ZZ_slim.root  
+  - WWTo2L2Nu.root  
+  - SingleTop_slim.root  
+
+---
+
+This modular structure allows flexibility:
+- Run individual steps for debugging  
+- Or execute full pipeline for final results  
+
+## Additional Information
+
+- This analysis is based on CMS Open Data and uses ROOT for data processing and visualization.
+- The workflow follows a typical High Energy Physics (HEP) pipeline:
+  1. Data reduction
+  2. Feature engineering (projected MET)
+  3. Event selection (cut-flow)
+  4. Physics interpretation (plots)
+
+### Tools & Frameworks
+- ROOT (C++)
+- TLorentzVector for kinematics
+- CMS Open Data format
+
+### Applications
+- Z boson reconstruction
+- Signal vs background discrimination
+- Detector performance validation
+
+### Future Improvements
+- Cross-section normalization using luminosity
+- Machine learning for signal/background separation
+- Systematic uncertainty estimation
+- Extension to other decay channels (μμ, ττ)
+
+---
+
+## Author
+
+**Khushpreet Kaur**  
+MSc Physics | Experimental High Energy Physics  
+Experience: GEM Detectors, CMS Open Data Analysis, ROOT, GEANT4
