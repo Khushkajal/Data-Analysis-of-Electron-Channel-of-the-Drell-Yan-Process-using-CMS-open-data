@@ -47,16 +47,14 @@ The following Monte Carlo (MC) simulated datasets were used:
 - **Drell–Yan (Z → e⁺e⁻)**
   - Dataset: DYtoLL_M50  
   - Description: Simulated Drell–Yan events in the invariant mass region above 50 GeV  
-  - Link: https://opendata.cern.ch/record/12345 *(replace with your exact link)*  
-
----
+  - Link: Drell-Yan Analysis: All nanoAOD datasets: https://opendata.cern.ch/record/35671
 
 ### 🔹 Background Processes
 
 - **Top Quark Pair Production (TTbar)**
   - Dataset: TTTo2L2Nu  
   - Description: Top-antitop production with dileptonic decay  
-  - Link: https://opendata.cern.ch/record/XXXXX  
+  - Link:(https://opendata.cern.ch/record/67801 ), ttbar: https://opendata.cern.ch/record/67801 , t-channel single top: https://opendata.cern.ch/record/64759 , tW-channel single anti-top: https://opendata.cern.ch/record/64825
 
 - **Single Top Production**
   - Dataset: SingleTop  
@@ -67,17 +65,17 @@ The following Monte Carlo (MC) simulated datasets were used:
   - **WZ**
     - Dataset: WZ  
     - Description: WZ → ℓν e⁺e⁻  
-    - Link: https://opendata.cern.ch/record/XXXXX  
+    - Link: (https://opendata.cern.ch/record/72754)
 
   - **ZZ**
     - Dataset: ZZ  
     - Description: ZZ → νν e⁺e⁻  
-    - Link: https://opendata.cern.ch/record/XXXXX  
+    - Link: https://opendata.cern.ch/record/75593 
 
   - **WW**
     - Dataset: WWTo2L2Nu  
     - Description: WW → e⁺ν e⁻ν  
-    - Link: https://opendata.cern.ch/record/XXXXX  
+    - Link: (https://opendata.cern.ch/record/72676)
 
 ---
 ## Data Source
@@ -96,10 +94,6 @@ https://opendata.cern.ch
 - These datasets are widely used for validating Standard Model predictions and detector performance.
 
 ---
-
-### ⚠️ Important
-
-Please replace the placeholder links (`XXXXX`) with the exact dataset URLs you used from the CMS Open Data Portal.
 
 ## 🚀 Execution Guide
 Ensure you have **CERN ROOT 6.28/02** or later installed.
