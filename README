@@ -1,4 +1,0 @@
-
-git rm filename.C
-git commit -m "Removed unnecessary file"
-git push
